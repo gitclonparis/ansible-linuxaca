@@ -1,5 +1,5 @@
 --- # Copy and command module example 
-- hosts: all
+- hosts: web1
   connection: ssh
   gather_facts: yes
   become: yes
@@ -10,13 +10,13 @@
     - conf/users.yml
   tasks:
   - name: Copy from the files directory test script
-    action: copy src=files/testscript.sh dest=/home/test/testscript.sh owner=test group=test mode=0755 backup=yes
+    action: copy src=files/testscript.sh dest=/home/cloud_user/testscript.sh owner=cloud_user group=cloud_user mode=0755 backup=yes
   - name: Make test script executable
     file:
-      path: /home/test/testscript.sh
+      path: /home/cloud_user/testscript.sh
       mode: "+x"
   - name: Execute test script
     command: ./testscript.sh
     args:
-      chdir: /home/test
+      chdir: /home/cloud_user
  
